@@ -12,12 +12,20 @@ exhibits = [
 ]
 
 # 1. Print each exhibit on its own line, numbered starting at 1:   1. The Art of Everyday Life
+for i in exhibits:
+    print(i+1 + ":" + exhibits[i])
 
 # 2. Print a blank line, then each exhibit in ALL CAPS followed by its length:   PAPER CUTS 10
+print()
+for j in exhibits:
+    print(exhibits[j].upper(), exhibits[j].length)
 
 # 3. Print a blank line, then how many exhibit names contain the word "the" (any case):   With "the": 3
+print()
+if "the" in exhibits:
+    print(exhibits)
 
-# BONUS (optional): Python has a built-in function, enumerate(), that numbers items for you.
+### as a built-in function, enumerate(), that numbers items for you.
 # Rewrite your code for #1 so it uses enumerate() instead of adding 1 each time.
 # Your output should stay exactly the same, so check.py still passes.
 # Look it up: https://docs.python.org/3/library/functions.html#enumerate
