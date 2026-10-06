@@ -12,8 +12,8 @@ exhibits = [
 ]
 
 # 1. Print each exhibit on its own line, numbered starting at 1:   1. The Art of Everyday Life
-for i in exhibits:
-    print(i+1 + ":" + exhibits[i])
+for i in range(len(exhibits)):
+    print("{i+1}: + exhibits[i]")
 
 # 2. Print a blank line, then each exhibit in ALL CAPS followed by its length:   PAPER CUTS 10
 print()
