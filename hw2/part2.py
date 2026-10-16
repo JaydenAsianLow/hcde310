@@ -7,5 +7,3 @@ from artworks import artworks
 
 for art in artworks:
     print(f"{art.get("title", "Unknown")} - {art.get("artist", "Unknown")} ({art.get("year", "Unknown")})")
-
-
