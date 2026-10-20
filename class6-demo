@@ -1,0 +1,8 @@
+import requests
+base = "https://api.artic.edu/api/v1/artworks"
+
+r = requests/get(base + "?li,it=1")
+if r.status_code == 200:
+    data = r.json()
+artworks = data["data"]
+print(data)
