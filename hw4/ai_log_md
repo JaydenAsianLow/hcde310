@@ -1,0 +1,263 @@
+## AI LOG
+
+I used AI as a learning resource while creating my website.
+Most of my searches were focused on understanding what was taught in class.
+I wanted to better understand how APIs and Flask routes worked together.
+I also used AI to help me with troubleshooting errors I was having with my code.
+Overall I used AI to better understand concepts covered in class that I struggled on.
+
+
+Google Slides
+can u read into slides like this: https://docs.google.com/presentation/d/1DSiK7N34wa7dhc6oL6mxIHXsLXgmLMPLe3NJWQxPN6E/edit?pli=1&slide=id.h6f0708dd2f9386b2_0_171#slide=id.h6f0708dd2f9386b2_0_171
+
+Fetched: HCDE 310 Class 09: Flask II, Forms, Input, and States
+The first fetch only returned the page shell, so I’ll try the HTML view it linked to.
+
+Fetched: HCDE 310 Class 09: Flask II, Forms, Input, and States
+Yes, I can read it. It’s the HCDE 310 Class 9 deck (Flask II, Forms, Input, and States), 65 slides including the speaker notes. Here’s the overall flow:
+
+Housekeeping and review (slides 1-10): P0 and HW4 deadlines, CC1 feedback, and HW2/HW3 reflections.
+API to Python recap (11-25): get the data with requests.get, do something with it in your own function, then show it. It also covers handling the “unhappy paths” (non-200 status, empty results, missing or null fields) and the difference between requests.get() and a dictionary’s .get().
+Flask code-along (28-52): routes, request.args, Jinja templates ({% %} vs {{ }}), HTML basics, forms, and moving the API call into api.py.
+Planning and states (55-59): the six-step way to start an app, GET vs. POST, and designing for empty, no-result, error, and missing-field states.
+Accessibility and polish (60-62): labels, alt text, keyboard tabbing, and a small CSS file.
+Git and work time (63-65): using git diff and git restore to check what AI changed, then HW4 work time.
+What would you like to do with it? Which slide or concept do you want to dig into first?
+
+Want to create a flask route in ordetr to create a website for the Chicago art insitutte API
+
+Offering a tiny example and a guiding question
+Since you’re learning Python, I won’t write the route for you, even for a project like this. I can give you hints and check your attempt, though. You’ve already seen what you need on slides 32 and 49 of that deck.
+
+A tiny example with different data, just to show the shape of a route:
+
+python
+@app.route("/hello")
+def hello():
+    return "Hi there"
+The route has a URL, a function that runs when someone visits it, and a return value that goes back to the browser.
+
+Next is the Try step: write your first attempt at a route for your Art Institute site and paste it here, even if it’s rough or incomplete. A good first goal is a route that returns hard-coded text, like the example above, before any API is involved.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Art Explorer</title>
+</head>
+<body>
+    <h1>Art Explorer</h1>
+    <p>Search the Art Institute of Chicago's artwork collection.</p>
+
+    <form action="/results" method="GET">
+        <label for="artwork_search">Search for an artwork or artist:</label>
+        <input
+            type="text"
+            id="artwork_search"
+            name="artwork_search"
+        >
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>
+Choosing a guiding question for the search form
+Nice start. This is the HTML half (the template), not the Flask route yet. Your form already follows the pattern from slides 46-48: a <label for> matched to the input’s id, a name on the input, and a submit button.
+
+I can’t write the route for you, but here’s a hint: your form says action="/results", so Flask will need a route for that URL. The HTML also has to be served by some route before anyone can see it.
+
+Predict step: a user types monet into your form and presses Search. What URL will the browser go to, and what do you think the part after the ? will look like?
+
+i have that already in my code.
+
+Then show me, because I can only see the HTML so far. Paste your app.py here (even if it’s unfinished or throwing an error) and I’ll look at what you’ve got.
+
+If you’d rather answer the prediction question first, go ahead. What URL does the browser go to when someone searches monet?
+
+    url = "https://api.artic.edu/api/v1/artworks/search"
+Weighing where the API call belongs in the app
+That’s the right endpoint, and it matches slide 18. It’s only a string so far, though. It isn’t a route, and nothing in it knows what the user typed into your form.
+
+Here’s a hint: slide 49 shows how a Flask route receives form data, and slide 18 shows how to pass a search term to this API.
+
+Your form’s input is named artwork_search. What do you think a route would need to do to get that value, so it can be sent to the API along with this URL?
+
+need to retrieve using flasks requrest
+
+File "C:\Users\lowjay00\Documents\hcde310\.venv\Lib\site-packages\flask\sansio\scaffold.py", line 362, in decorator
+    self.add_url_rule(rule, endpoint, f, **options)
+  File "C:\Users\lowjay00\Documents\hcde310\.venv\Lib\site-packages\flask\sansio\scaffold.py", line 47, in wrapper_func
+    return f(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lowjay00\Documents\hcde310\.venv\Lib\site-packages\flask\sansio\app.py", line 657, in add_url_rule
+    raise AssertionError(
+AssertionError: View function mapping is overwriting an existing endpoint function: results
+This error means Flask found two functions registered with the same endpoint name: results.
+
+Most likely, you accidentally have two copies of your /results route in app.py.
+
+can u help me understadn how API's and flask and python all connect
+Absolutely. The easiest way to understand it is to think of your Art Explorer as a restaurant.
+
+Python, Flask, and APIs each have different jobs, but they work together to make your website function.
+
+1. What is each thing?
+File:Python logo 01.svg - Wikimedia Commons
+
+Python — The language
+
+Python is the programming language you're writing your instructions in. It handles logic, variables, functions, loops, and data.
+
+Flask Logo PNG Vector (SVG) Free Download
+
+Flask — The web framework
+
+Flask is a Python tool that helps you build websites. It receives browser requests, decides what code to run, and sends back HTML pages.
+
+API Development Services and System Integration Advice | Blue Donut Studios
+
+API — The communication system
+
+An API lets your program communicate with another service. Your app uses the Art Institute's API to retrieve artwork information.
+
+Think of it this way:
+
+Python = The language you speak.
+
+Flask = The restaurant employee taking your order and coordinating everything.
+
+API = The supplier that provides the ingredients (artwork information).
+
+2. How they connect in your project
+Let's use your Monet search as an example.
+
+What happens when you search Monet?
+You — home.html
+
+You type Monet into the search box and press Search.
+
+ART EXPLORER
+
+Monet
+Search
+Flask — app.py
+
+Flask receives the form submission at /results.
+
+Your code retrieves the search term:
+
+term = request.args.get("artwork_search", "")
+
+Python — app.py
+
+Your Python code calls the function in api.py:
+
+artworks = search_art(term)
+
+API — api.py
+
+Your function sends a request to the Art Institute API.
+
+response = requests.get(
+    url,
+    params=params,
+    headers=headers,
+    timeout=10
+)
+
+The API sends artwork information back as JSON.
+
+Python — api.py
+
+Your code processes the returned data, checks titles and artists, and creates a list of matching artworks.
+
+Flask — app.py
+
+Flask sends the artwork list to your HTML template:
+
+return render_template(
+    "results.html",
+    artworks=artworks,
+    term=term,
+    error=error
+)
+
+HTML — results.html
+
+The template displays the results to you using the information Flask passed into it.
+
+You see the Monet artwork results!
+
+3. What does each file actually do?
+File
+
+Responsibility
+
+home.html
+
+Displays the search form
+
+app.py
+
+Connects the pages, receives input, and calls functions
+
+api.py
+
+Communicates with the Art Institute API
+
+results.html
+
+Displays the returned artwork information
+
+The important thing to understand is that Flask doesn't replace Python. Flask is a framework that uses Python. And the API doesn't build your website; it simply provides the data your website needs.
+
+4. Let's see if it makes sense
+Try answering these three questions. Don't worry about getting them wrong — I want to see which parts we should review.
+
+Quick knowledge check
+
+3/3 answered
+1. You type Monet into the search box. Which file contains the HTML form?
+
+
+app.py
+
+home.html
+
+api.py
+
+results.html
+Not quite — the answer is home.html.
+
+home.html contains the form where the user enters their search.
+
+2. Which part of your project communicates with the Art Institute API?
+
+
+home.html
+
+results.html
+
+api.py
+
+The browser
+Correct
+
+api.py uses requests to send the HTTP request and process the API response.
+
+3. What is Flask responsible for in your project?
+
+
+Creating the artwork data
+
+Connecting browser requests to Python code and HTML responses
+
+Hosting the Art Institute's collection
+
+Replacing Python
+Correct
+
+Flask handles web requests, routes them to Python functions, and returns rendered pages.
+
+Score: 2/3
+Once you understand this flow, you'll have a much easier time understanding Flask assignments because the same structure applies to almost any website that retrieves information from an API.

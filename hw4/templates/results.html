@@ -1,0 +1,33 @@
+## Creates the result page template for the website
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Art Explorer - Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+
+    <p>You searched for: {{ term }}</p>
+
+    {% if not term.strip() %}
+        <p>Please enter an artwork or artist name to search.</p>
+
+    {% elif error %}
+        <p>Sorry, something went wrong while connecting to the Art Institute API. Please try again later.</p>
+
+    {% elif artworks %}
+        {% for artwork in artworks %}
+            <h2>{{ artwork.title or "Untitled" }}</h2>
+            <p>Artist: {{ artwork.artist_title or "Unknown artist" }}</p>
+            <p>Date: {{ artwork.date_display or "Unknown date" }}</p>
+        {% endfor %}
+
+    {% else %}
+        <p>Sorry, we couldn't find any matching artworks. Please try another search!</p>
+    {% endif %}
+
+    <a href="/">Search again</a>
+</body>
+</html>

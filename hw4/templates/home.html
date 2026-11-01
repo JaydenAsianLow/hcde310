@@ -1,0 +1,23 @@
+## Creates home page template for the website
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Art Explorer</title>
+</head>
+<body>
+    <h1>Art Explorer</h1>
+    <p>Search the Art Institute of Chicago's artwork collection.</p>
+
+    <form action="/results" method="GET">
+        <label for="artwork_search">Search for an artwork or artist:</label>
+        <input
+            type="text"
+            id="artwork_search"
+            name="artwork_search"
+        >
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>
