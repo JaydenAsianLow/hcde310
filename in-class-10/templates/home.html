@@ -1,0 +1,21 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Search</title>
+</head>
+<body>
+    <h1>Book Search</h1>
+
+    <form action="/results" method="get">
+        <label for="author">Author</label>
+        <input id="author" name="author_search" type="text">
+        <button type="submit">Find books</button>
+    </form>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>
