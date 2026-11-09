@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-
 from api import get_artworks
 
 app = Flask(__name__)
@@ -15,14 +14,24 @@ def results():
     artist = (request.values.get("artist") or "").strip()
 
     if not artist:
-        return render_template("home.html", message="No search term entered.")
+        return render_template(
+            "home.html",
+            message="No search term entered."
+        )
 
     try:
         artworks = get_artworks(artist)
-    except Exception as e:
-        return render_template("home.html", message=f"Something broke the request: {e}")
+    except Exception:
+        return render_template(
+            "home.html",
+            message="Sorry, we couldn't retrieve the artwork. Please try again."
+        )
 
-    return render_template("results.html", artist=artist, artworks=artworks)
+    return render_template(
+        "results.html",
+        artist=artist,
+        artworks=artworks
+    )
 
 
 if __name__ == "__main__":
