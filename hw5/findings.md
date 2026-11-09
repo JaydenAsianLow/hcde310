@@ -29,15 +29,21 @@ Answers to my two questions, in my own words:
 - Putting both GET/POST isn't necessarily a bug, but POST may be more appropriate for the form that is being used.
 
 ## 5. My fix
-What was wrong: 
-What I changed:
-How I checked it works:
+What was wrong: When the API requet failed, teh Flask app displayed raw details to the users which can be confusing as the information is technical.
+What I changed: Replaced the detailed exception message with a user-friendly message. Also made sure that the home page displays the message passed from Flask.
+How I checked it works: I added a pytest test that simulates an API error. It checked to see if the friendly message appeared and not the technical mesage. All 3 tests passed.
 Commit before: (hash)  Commit after: (hash)
+
+Baseline commit: a464c94d3160a6ae99637e97557168c261f134fc
+Fix commit: cab570556ca753ad9c95f4dbbb2b64388785a7d6
 
 ## 6. Can we ship it? (100–150 words)
 Yes or no, and why:
 
-One thing my HW4 does better:
-One thing the AI's app does better:
+Not yet. The artist search works, and the app handles empty searches and errors with a user-friendly message. I would also add automated tests to check that the search page loads, artwork results display, and technical error details are hidden. However, during manual testing, searching for a random artist still returned artwork instead of a no-results page, which shows that this part needs improvement. This can lead to confusion for users and make them question whether the search results are accurate. Before shipping the app, I would investigate how the API handles search terms, fix the issue, and run the manual and automated tests again to make sure the results are reliable.
+
+One thing my HW4 does better: HW4 did a better job of displaying detailed artwork information, such as the artist's name, details, date, and artwork ID
+
+One thing the AI's app does better: HW5 app does a better job of testing its behavior automatically and protecting its users from seeing raw tehcnical erorrs. I would like to fix and retest the searching design before releasing it.
 
 AI use goes in `ai_use.md` (the five points on the AI Use Card).
